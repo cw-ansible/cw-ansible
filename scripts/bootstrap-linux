@@ -38,7 +38,10 @@ install_cw_ansible() {
 	cd cw-ansible
 	git submodule init
 	git submodule update --depth 1
-	cd ..
+	cd playbooks
+	git submodule init
+	git submodule update --depth 1
+	cd ../..
     fi
     cd $_OLD_CWD
 
