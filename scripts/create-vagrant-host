@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $(whoami) != 'root' ]; then
+   echo "Run me as root (sudo $0)"
+   exit 1
+fi
+
+. ~/Developer/ansible/ansible/hacking/env-setup
+
+cd ../system-install
+ansible-playbook -i inventory chroot.yml \
+		 -e partition=partition-vagrant \
+		 -e repository=http://archive.ubuntu.com/ubuntu
+
+cd ../playbooks
+ansible-playbook -i inventory.chroot pb_ansible-bootstrap-chroot.yml
+ansible-playbook -i inventory.chroot -c chroot pb_vagrant-box.yml
+
