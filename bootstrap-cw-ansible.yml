@@ -1,0 +1,78 @@
+---
+
+# Simple playbook to bootstrap cw-ansible.
+#
+# Make sure you have already:
+#   - bootstraped ansible
+#   - installed python-yaml and python-jinja2:
+#     apt-get install python-yaml python-jinja2
+#
+# Then run:
+#
+#   ansible-playbook -i localhost, bootstrap-cw-ansible.yml
+
+- hosts: localhost
+  connection: local
+
+  vars:
+    root: '.'
+    base_url: 'https://github.com/cw-ansible'
+    repos:
+      - repo: '{{ base_url }}/cw-ansible.git'
+        dest: '{{ root }}'
+      - repo: '{{ base_url }}/system-install.git'
+        dest: '{{ root }}/system-install'
+      - repo: '{{ base_url }}/playbooks.git'
+        dest: '{{ root }}/playbooks'
+      # playbooks/roles
+      - repo: "{{ base_url }}/cw.ansible-bootstrap.git"
+        dest: '{{ root }}/playbooks/roles/cw.ansible-bootstrap'
+      - repo: "{{ base_url }}/cw.apt.git"
+        dest: '{{ root }}/playbooks/roles/cw.apt'
+      - repo: "{{ base_url }}/cw.backuppc-agent.git"
+        dest: '{{ root }}/playbooks/roles/cw.backuppc-agent'
+      - repo: "{{ base_url }}/cw.base.git"
+        dest: '{{ root }}/playbooks/roles/cw.base'
+      - repo: "{{ base_url }}/cw.credentials.git"
+        dest: '{{ root }}/playbooks/roles/cw.credentials'
+      - repo: "{{ base_url }}/cw.dell.git"
+        dest: '{{ root }}/playbooks/roles/cw.dell'
+      - repo: "{{ base_url }}/cw.etckeeper.git"
+        dest: '{{ root }}/playbooks/roles/cw.etckeeper'
+      - repo: "{{ base_url }}/cw.isc-dhcp-client.git"
+        dest: '{{ root }}/playbooks/roles/cw.isc-dhcp-client'
+      - repo: "{{ base_url }}/cw.lib.osx.git"
+        dest: '{{ root }}/playbooks/roles/cw.lib.osx'
+      - repo: "{{ base_url }}/cw.lldp.git"
+        dest: '{{ root }}/playbooks/roles/cw.lldp'
+      - repo: "{{ base_url }}/cw.locales.git"
+        dest: '{{ root }}/playbooks/roles/cw.locales'
+      - repo: "{{ base_url }}/cw.mmonit.git"
+        dest: '{{ root }}/playbooks/roles/cw.mmonit'
+      - repo: "{{ base_url }}/cw.monit.git"
+        dest: '{{ root }}/playbooks/roles/cw.monit'
+      - repo: "{{ base_url }}/cw.ntp.git"
+        dest: '{{ root }}/playbooks/roles/cw.ntp'
+      - repo: "{{ base_url }}/cw.opensmtpd.git"
+        dest: '{{ root }}/playbooks/roles/cw.opensmtpd'
+      - repo: "{{ base_url }}/cw.openvpn.git"
+        dest: '{{ root }}/playbooks/roles/cw.openvpn'
+      - repo: "{{ base_url }}/cw.ssh.git"
+        dest: '{{ root }}/playbooks/roles/cw.ssh'
+      - repo: "{{ base_url }}/cw.sysctl.git"
+        dest: '{{ root }}/playbooks/roles/cw.sysctl'
+      - repo: "{{ base_url }}/cw.upstart-services.git"
+        dest: '{{ root }}/playbooks/roles/cw.upstart-services'
+      - repo: "{{ base_url }}/cw.vagrant-box.git"
+        dest: '{{ root }}/playbooks/roles/cw.vagrant-box'
+      - repo: "{{ base_url }}/cw.wireless.git"
+        dest: '{{ root }}/playbooks/roles/cw.wireless'
+
+  tasks:
+    - name: clone cw-ansible git sources
+      git:
+        repo: '{{ item.repo }}'
+        dest: '{{ item.dest }}'
+        clone: '{{ item.clone | default(True) }}'
+        version: '{{ item.version | default("HEAD") }}'
+      with_items: repos
