@@ -13,6 +13,27 @@ lang: american
 
 Collection of [ansible](http://www.ansible.com/) roles.
 
+## Configuration
+
+All sensitive data and local configuration should be stored outside of the
+orchestration directory. A typical layout could look like:
+
+    .
+    |-- README.md
+    |-- private
+    |-- playbooks
+    |-- scripts
+    `-- system-install
+
+Configuration files:
+
+- `ansible.cfg`: the main *Ansible* configuration file which is up to
+  you. Have a look at the `ansible.cfg.example` file for configuration
+  ideas.
+
+- `private` This directory handle all you private data and configuration
+  goes here. This is given by the `dir` option of the `custom` section from
+  `ansible.cfg`
 
 
 
