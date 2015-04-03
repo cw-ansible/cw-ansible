@@ -30,8 +30,8 @@
         dest: '{{ root }}/playbooks/library/filter_plugins'
       - repo: "{{ base_url }}/lookup_plugins.git"
         dest: '{{ root }}/playbooks/library/lookup_plugins'
-      - repo: "{{ base_url }}/var_plugins.git"
-        dest: '{{ root }}/playbooks/library/var_plugins'
+      - repo: "{{ base_url }}/vars_plugins.git"
+        dest: '{{ root }}/playbooks/library/vars_plugins'
       # playbooks/roles
       - repo: "{{ base_url }}/cw.ansible-bootstrap.git"
         dest: '{{ root }}/playbooks/roles/cw.ansible-bootstrap'
