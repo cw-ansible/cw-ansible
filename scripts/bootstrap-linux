@@ -5,10 +5,10 @@ DEVELOPER=~/Developer
 
 ANSIBLE_PREFIX=$DEVELOPER/ansible
 ANSIBLE_SRC=$ANSIBLE_PREFIX/ansible
-CW_ANSIBLE_SRC=$ANSIBLE_PREFIX/cw-ansible
+ANSIBLE_VERSION=${1:devel}
 
 _OLD_CWD=$(pwd)
-
+TOP_LEVEL=$(git rev-parse --show-toplevel)
 
 install_deps() {
     sudo apt-get update
@@ -21,36 +21,23 @@ install_ansible() {
     mkdir -p $ANSIBLE_PREFIX
     cd  $ANSIBLE_PREFIX
     if ! test -d $ANSIBLE_SRC; then
-	git clone --depth 1 https://github.com/ansible/ansible.git
-	cd ansible
-	git submodule init
-	git submodule update --depth 1
-	cd ..
+        git clone --recursive https://github.com/ansible/ansible.git
     fi
+    cd ansible
+    git checkout $ANSIBLE_VERSION
     cd $_OLD_CWD
 }
 
 install_cw_ansible() {
-   mkdir -p $ANSIBLE_PREFIX
-    cd  $ANSIBLE_PREFIX
-    if ! test -d $CW_ANSIBLE_SRC; then
-	git clone --depth 1 https://github.com/cw-ansible/cw-ansible.git
-	cd cw-ansible
-	git submodule init
-	git submodule update --depth 1
-	cd playbooks
-	git submodule init
-	git submodule update --depth 1
-	cd ../..
-    fi
+    . $ANSIBLE_SRC/hacking/env-setup
+    cd $TOP_LEVEL
+    ansible-playbook -i localhost, bootstrap-cw-ansible.yml
     cd $_OLD_CWD
-
 }
 
 install_deps
 install_ansible
 install_cw_ansible
-
 
 cat <<EOF
 Before invoking ansible you should setup the haking environment:

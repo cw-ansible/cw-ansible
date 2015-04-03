@@ -18,8 +18,6 @@
     root: '.'
     base_url: 'https://github.com/cw-ansible'
     repos:
-      - repo: '{{ base_url }}/cw-ansible.git'
-        dest: '{{ root }}'
       - repo: '{{ base_url }}/system-install.git'
         dest: '{{ root }}/system-install'
       - repo: '{{ base_url }}/playbooks.git'

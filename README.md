@@ -13,6 +13,16 @@ lang: american
 
 Collection of [ansible](http://www.ansible.com/) roles.
 
+
+## installation
+
+You first need to checkout `cw-ansible` repository:
+
+	git clone https://github.com/cw-ansible/cw-ansible.git
+
+Then execute to `scripts/bootstrap-linux` if you are running *linux*.
+
+
 ## Configuration
 
 All sensitive data and local configuration should be stored outside of the
@@ -21,22 +31,25 @@ orchestration directory. A typical layout could look like:
     .
     |-- README.md
     |-- private
-    |-- playbooks
+    |-+ playbooks
+	| |-- ansible.cfg
+	| `-- inventory  
     |-- scripts
     `-- system-install
 
 Configuration files:
 
-- `ansible.cfg`: the main *Ansible* configuration file which is up to
-  you. Have a look at the `ansible.cfg.example` file for configuration
-  ideas.
+- `playbooks/ansible.cfg`: the main *Ansible* configuration file which is up
+  to you. Have a look at the `playbooks/ansible.cfg.example` file for
+  configuration ideas.
+
+- `playbooks/inventory`: the *Ansible* inventory file where you declare all
+  your hosts. Have a look at the `playbooks/inventory.example` file for
+  configuration ideas.
 
 - `private` This directory handle all you private data and configuration
   goes here. This is given by the `dir` option of the `custom` section from
   `ansible.cfg`
-
-
-
 
 ## Copyright
 
