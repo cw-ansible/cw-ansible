@@ -1,6 +1,0 @@
-[submodule "playbooks"]
-	path = playbooks
-	url = https://github.com/cw-ansible/playbooks.git
-[submodule "system-install"]
-	path = system-install
-	url = https://github.com/cw-ansible/system-install.git
