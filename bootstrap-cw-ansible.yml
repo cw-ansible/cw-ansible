@@ -22,6 +22,16 @@
         dest: '{{ root }}/system-install'
       - repo: '{{ base_url }}/playbooks.git'
         dest: '{{ root }}/playbooks'
+      # library
+      - repo: "{{ base_url }}/cw.lib.osx.git"
+        dest: '{{ root }}/playbooks/library/cw.lib.osx'
+      # plugins
+      - repo: "{{ base_url }}/filter_plugins.git"
+        dest: '{{ root }}/playbooks/library/filter_plugins'
+      - repo: "{{ base_url }}/lookup_plugins.git"
+        dest: '{{ root }}/playbooks/library/lookup_plugins'
+      - repo: "{{ base_url }}/var_plugins.git"
+        dest: '{{ root }}/playbooks/library/var_plugins'
       # playbooks/roles
       - repo: "{{ base_url }}/cw.ansible-bootstrap.git"
         dest: '{{ root }}/playbooks/roles/cw.ansible-bootstrap'
@@ -39,8 +49,6 @@
         dest: '{{ root }}/playbooks/roles/cw.etckeeper'
       - repo: "{{ base_url }}/cw.isc-dhcp-client.git"
         dest: '{{ root }}/playbooks/roles/cw.isc-dhcp-client'
-      - repo: "{{ base_url }}/cw.lib.osx.git"
-        dest: '{{ root }}/playbooks/roles/cw.lib.osx'
       - repo: "{{ base_url }}/cw.lldp.git"
         dest: '{{ root }}/playbooks/roles/cw.lldp'
       - repo: "{{ base_url }}/cw.locales.git"
