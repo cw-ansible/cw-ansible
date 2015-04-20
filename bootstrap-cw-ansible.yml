@@ -27,11 +27,11 @@
         dest: '{{ root }}/playbooks/library/cw.lib.osx'
       # plugins
       - repo: "{{ base_url }}/filter_plugins.git"
-        dest: '{{ root }}/playbooks/library/filter_plugins'
+        dest: '{{ root }}/playbooks/filter_plugins'
       - repo: "{{ base_url }}/lookup_plugins.git"
-        dest: '{{ root }}/playbooks/library/lookup_plugins'
+        dest: '{{ root }}/playbooks/lookup_plugins'
       - repo: "{{ base_url }}/vars_plugins.git"
-        dest: '{{ root }}/playbooks/library/vars_plugins'
+        dest: '{{ root }}/playbooks/vars_plugins'
       # playbooks/roles
       - repo: "{{ base_url }}/cw.ansible-bootstrap.git"
         dest: '{{ root }}/playbooks/roles/cw.ansible-bootstrap'
