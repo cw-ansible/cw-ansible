@@ -47,6 +47,8 @@
         dest: '{{ root }}/playbooks/roles/cw.dell'
       - repo: "{{ base_url }}/cw.etckeeper.git"
         dest: '{{ root }}/playbooks/roles/cw.etckeeper'
+      - repo: "{{ base_url }}/cw.hp.git"
+        dest: '{{ root }}/playbooks/roles/cw.hp'
       - repo: "{{ base_url }}/cw.isc-dhcp-client.git"
         dest: '{{ root }}/playbooks/roles/cw.isc-dhcp-client'
       - repo: "{{ base_url }}/cw.lldp.git"
@@ -63,6 +65,8 @@
         dest: '{{ root }}/playbooks/roles/cw.opensmtpd'
       - repo: "{{ base_url }}/cw.openvpn.git"
         dest: '{{ root }}/playbooks/roles/cw.openvpn'
+      - repo: "{{ base_url }}/cw.ramdisk.git"
+        dest: '{{ root }}/playbooks/roles/cw.ramdisk'
       - repo: "{{ base_url }}/cw.ssh.git"
         dest: '{{ root }}/playbooks/roles/cw.ssh'
       - repo: "{{ base_url }}/cw.sysctl.git"
