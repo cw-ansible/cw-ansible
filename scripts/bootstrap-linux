@@ -4,8 +4,20 @@ TOP_LEVEL=$(git rev-parse --show-toplevel)
 . $TOP_LEVEL/cw-ansible.cfg
 
 
+packages='git rsync ca-certificates python-jinja2 python-yaml'
+
+
+apt_get_update() {
+    local lastup="$(( (`date +%s` - `stat -L --format %Y /var/lib/apt/lists`) > (30*60) ))"
+    if test $lastup = "0"; then
+	sudo apt-get update
+    fi
+    
+}
+
+
 install_deps() {
-    sudo apt-get update
+    apt_get_update
     sudo apt-get install --yes --no-install-recommends \
 	 git rsync ca-certificates python-jinja2 python-yaml
 }
