@@ -1,0 +1,43 @@
+#!/bin/bash
+
+TOP_LEVEL=$(git rev-parse --show-toplevel)
+. $TOP_LEVEL/cw-ansible.cfg
+
+git_clone() {
+    url="$1"
+    target="$2"
+    branch="$3"
+    set -x
+    if ! test -d $target/.git; then
+	git clone $url $target
+    fi
+
+    if ! test -z "$branch"; then
+	local _pwd=$(pwd)
+	cd $target
+	git checkout $branch
+	cd $_pwd
+    fi
+    set +x
+}
+
+install_ansible() {
+    mkdir -p $ANSIBLE_PREFIX
+    cd  $ANSIBLE_PREFIX
+
+    git_clone https://github.com/ansible/ansible.git $ANSIBLE_SRC $ANSIBLE_VERSION
+    git_clone https://github.com/ansible/ansible-modules-core.git \
+	      $ANSIBLE_SRC/lib/ansible/modules/core $ANSIBLE_CORE_VERSION
+    git_clone https://github.com/ansible/ansible-modules-extras.git \
+	      $ANSIBLE_SRC/lib/ansible/modules/extras $ANSIBLE_EXTRAS_VERSION
+    cd $_OLD_CWD
+}
+
+install_ansible
+
+
+cat <<EOF
+Before invoking ansible you should setup the haking environment:
+
+  . $ANSIBLE_SRC/hacking/env-setup
+EOF

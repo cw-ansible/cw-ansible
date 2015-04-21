@@ -1,0 +1,15 @@
+#!/bin/bash
+
+TOP_LEVEL=$(git rev-parse --show-toplevel)
+. $TOP_LEVEL/cw-ansible.cfg
+
+
+install_cw_ansible() {
+    . $ANSIBLE_SRC/hacking/env-setup
+    cd $TOP_LEVEL
+    ansible-playbook -i localhost, bootstrap-cw-ansible.yml
+    cd $_OLD_CWD
+}
+
+install_cw_ansible
+
