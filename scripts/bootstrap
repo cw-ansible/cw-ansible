@@ -1,0 +1,21 @@
+#!/bin/bash
+
+
+git clone https://github.com/cw-ansible/cw-ansible.git
+
+cd cw-ansible
+
+case $(uname) in
+    Linux)
+	./scripts/bootstrap-linux
+	;;
+    Darwin)
+	./scripts/bootstrap-macosx
+	;;
+    *)
+	echo "Unsupported platform."
+	exit 1
+	;;
+esac
+
+	   
