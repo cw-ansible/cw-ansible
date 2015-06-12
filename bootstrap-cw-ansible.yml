@@ -81,6 +81,8 @@
         dest: '{{ root }}/playbooks/roles/cw.vagrant-box'
       - repo: "{{ base_url }}/cw.wireless.git"
         dest: '{{ root }}/playbooks/roles/cw.wireless'
+      - repo: "{{ base_url }}/cw.yrmcds.git"
+        dest: '{{ root }}/playbooks/roles/cw.yrmcds'
 
   tasks:
     - name: clone cw-ansible git sources
