@@ -61,6 +61,8 @@
         dest: '{{ root }}/playbooks/roles/cw.mmonit'
       - repo: "{{ base_url }}/cw.monit.git"
         dest: '{{ root }}/playbooks/roles/cw.monit'
+      - repo: "{{ base_url }}/cw.mount-extra.git"
+        dest: '{{ root }}/playbooks/roles/cw.mount-extra'
       - repo: "{{ base_url }}/cw.ntp.git"
         dest: '{{ root }}/playbooks/roles/cw.ntp'
       - repo: "{{ base_url }}/cw.opensmtpd.git"
