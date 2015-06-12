@@ -49,6 +49,8 @@
         dest: '{{ root }}/playbooks/roles/cw.etckeeper'
       - repo: "{{ base_url }}/cw.hp.git"
         dest: '{{ root }}/playbooks/roles/cw.hp'
+      - repo: "{{ base_url }}/cw.interfaces.git"
+        dest: '{{ root }}/playbooks/roles/cw.interfaces'
       - repo: "{{ base_url }}/cw.isc-dhcp-client.git"
         dest: '{{ root }}/playbooks/roles/cw.isc-dhcp-client'
       - repo: "{{ base_url }}/cw.lldp.git"
