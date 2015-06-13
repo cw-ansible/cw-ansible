@@ -7,7 +7,6 @@ git_clone() {
     url="$1"
     target="$2"
     branch="$3"
-    set -x
     if ! test -d $target/.git; then
 	git clone $url $target
     fi
@@ -18,18 +17,36 @@ git_clone() {
 	git checkout $branch
 	cd $_pwd
     fi
-    set +x
 }
 
 install_ansible() {
     mkdir -p $ANSIBLE_PREFIX
     cd  $ANSIBLE_PREFIX
-
     git_clone https://github.com/ansible/ansible.git $ANSIBLE_SRC $ANSIBLE_VERSION
+    cd $ANSIBLE_SRC
+    git checkout -b local
+    for c in $ANSIBLE_CP; do
+	git cherry-pick $c
+    done
+
+    cd  $ANSIBLE_PREFIX
     git_clone https://github.com/ansible/ansible-modules-core.git \
 	      $ANSIBLE_SRC/lib/ansible/modules/core $ANSIBLE_CORE_VERSION
+    cd $ANSIBLE_SRC/lib/ansible/modules/core
+    git checkout -b local
+    for c in $ANSIBLE_CORE_CP; do
+	git cherry-pick $c
+    done
+    
+    cd  $ANSIBLE_PREFIX
     git_clone https://github.com/ansible/ansible-modules-extras.git \
 	      $ANSIBLE_SRC/lib/ansible/modules/extras $ANSIBLE_EXTRAS_VERSION
+    cd $ANSIBLE_SRC/lib/ansible/modules/extras
+    git checkout -b local
+    for c in $ANSIBLE_EXTRAS_CP; do
+	git cherry-pick $c
+    done
+    
     cd $_OLD_CWD
 }
 
