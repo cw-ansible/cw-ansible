@@ -4,7 +4,7 @@ TOP_LEVEL=$(git rev-parse --show-toplevel)
 . $TOP_LEVEL/cw-ansible.cfg
 
 if [ $(whoami) != 'root' ]; then
-   echo "Run me as root (sudo $0)"
+   echo "Run me as root (sudo -H $0)"
    exit 1
 fi
 
