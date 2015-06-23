@@ -1,0 +1,20 @@
+#!/bin/bash
+
+TOP_LEVEL=$(git rev-parse --show-toplevel)
+. $TOP_LEVEL/cw-ansible.cfg
+
+if [ $(whoami) != 'root' ]; then
+   echo "Run me as root (sudo -H $0)"
+   exit 1
+fi
+
+. $ANSIBLE_SRC/hacking/env-setup
+
+cd $TOP_LEVEL/system-install
+ansible-playbook -i inventory chroot.yml \
+		 -e partition=partition-vagrant \
+		 -e distrib=precise \
+		 -e repository=http://archive.ubuntu.com/ubuntu
+
+cd $TOP_LEVEL/playbooks
+ansible-playbook -i inventory.chroot pb_ansible-bootstrap-chroot.yml
