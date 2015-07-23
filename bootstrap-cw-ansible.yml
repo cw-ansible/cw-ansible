@@ -71,6 +71,8 @@
         dest: '{{ root }}/playbooks/roles/cw.openvpn'
       - repo: "{{ base_url }}/cw.ramdisk.git"
         dest: '{{ root }}/playbooks/roles/cw.ramdisk'
+      - repo: "{{ base_url }}/cw.root-password.git"
+        dest: '{{ root }}/playbooks/roles/cw.root-password'
       - repo: "{{ base_url }}/cw.ssh.git"
         dest: '{{ root }}/playbooks/roles/cw.ssh'
       - repo: "{{ base_url }}/cw.sysctl.git"
