@@ -1,0 +1,9 @@
+#!/bin/bash
+
+TOP_LEVEL=$(git rev-parse --show-toplevel)
+. "$TOP_LEVEL/cw-ansible.cfg"
+
+$TOP_LEVEL/scripts/bootstrap-ansible
+$TOP_LEVEL/scripts/bootstrap-macosx-ansible-env
+#"$TOP_LEVEL/scripts/bootstrap-macosx-xcode-cli"
+#"$TOP_LEVEL/scripts/bootstrap-macosx-pyenv"

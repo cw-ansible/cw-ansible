@@ -1,0 +1,37 @@
+#!/bin/sh
+
+
+TOP_LEVEL=$(git rev-parse --show-toplevel)
+. "$TOP_LEVEL/cw-ansible.cfg"
+
+LIBS="
+http://pyyaml.org/download/pyyaml/PyYAML-3.11.tar.gz
+https://pypi.python.org/packages/source/M/MarkupSafe/MarkupSafe-0.23.tar.gz
+https://pypi.python.org/packages/source/J/Jinja2/Jinja2-2.8.tar.gz
+"
+
+mkdir -p libs
+cd libs
+
+PYTHONPATH_PREFIX="../libs/PyYAML-3.11/lib:../libs/MarkupSafe-0.23:../libs/Jinja2-2.8"
+for lib in $LIBS; do
+    target=$(basename $lib)
+    if ! test -e $target; then
+	curl $lib > $target
+	tar xfz $target
+	
+    fi
+done
+echo "PYTHONPATH=$PYTHONPATH_PREFIX ansible-playbook"
+cd ..
+
+cd playbooks 
+cat<<EOF | sudo sh -
+. $ANSIBLE_PREFIX/hacking/env-setup
+PYTHONPATH=$PYTHONPATH_PREFIX ansible-playbook -i inventory.localhost pb_osx_bootstrap_ansible.yml
+systemsetup -setremotelogin on
+
+EOF
+
+
+# curl  > MarkupSafe-0.23.tar.gz
