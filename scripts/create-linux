@@ -10,10 +10,16 @@ fi
 
 . $ANSIBLE_SRC/hacking/env-setup
 
+distrib=${1:-trusty}
+
+
 cd $TOP_LEVEL/system-install
 ansible-playbook -i inventory chroot.yml \
+		 -e distrib=$distrib \
 		 -e partition=partition-vagrant \
 		 -e repository=http://archive.ubuntu.com/ubuntu
 
 cd $TOP_LEVEL/playbooks
 ansible-playbook -i inventory.chroot pb_ansible-bootstrap-chroot.yml
+ansible-playbook -i inventory.chroot -c chroot pb_vagrant-box.yml
+
